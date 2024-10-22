@@ -25,7 +25,7 @@ class AuthButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.transparent,
+          backgroundColor: backgroundColor,
           elevation: 0,
           side: const BorderSide(
             color: Colors.black,
@@ -45,8 +45,8 @@ class AuthButton extends StatelessWidget {
             if (image != null) const SizedBox(width: 22),
             Text(
               text,
-              style: const TextStyle(
-                color: Colors.black,
+              style: TextStyle(
+                color: textColor,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.bold,
                 fontSize: 18,

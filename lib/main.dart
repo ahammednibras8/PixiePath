@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travel_app/core/splash/splash_provider.dart';
-import 'package:travel_app/core/splash/splash_screen.dart';
 import 'package:travel_app/core/theme/app_theme.dart';
+import 'package:travel_app/features/auth/presentation/forgot_password_screen.dart';
 import 'package:travel_app/features/auth/providers/login_provider.dart';
+import 'package:travel_app/features/auth/providers/signup_provider.dart';
 
 void main() {
   runApp(
@@ -11,6 +12,7 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (context) => SplashProvider()),
         ChangeNotifierProvider(create: (context) => LoginProvider()),
+        ChangeNotifierProvider(create: (context) => SignupProvider()),
       ],
       child: const MainApp(),
     ),
@@ -25,7 +27,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.defaultTheme,
-      home: const SplashScreen(),
+      home: const ForgotPasswordScreen(),
     );
   }
 }
