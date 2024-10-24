@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:travel_app/features/auth/providers/signup_provider.dart';
 
 class AuthTextField extends StatelessWidget {
   final String labelText;
@@ -6,6 +8,7 @@ class AuthTextField extends StatelessWidget {
   final TextEditingController controller;
   final String? errorText;
   final String? Function(String?)? validator;
+  final void Function(String)? onChanged;
 
   const AuthTextField({
     super.key,
@@ -14,10 +17,13 @@ class AuthTextField extends StatelessWidget {
     this.isPasswordField = false,
     this.errorText,
     this.validator,
+    this.onChanged,
   });
 
   @override
   Widget build(BuildContext context) {
+    final signupProvider = Provider.of<SignupProvider>(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -32,8 +38,11 @@ class AuthTextField extends StatelessWidget {
         const SizedBox(height: 12),
         TextFormField(
           controller: controller,
-          obscureText: isPasswordField,
+          obscureText: isPasswordField && !signupProvider.isPasswordVisible,
           validator: validator,
+          onChanged: (value) {
+            signupProvider.updatePassword(value);
+          },
           decoration: InputDecoration(
             hintText: labelText,
             errorText: errorText,
@@ -64,6 +73,19 @@ class AuthTextField extends StatelessWidget {
                 width: 2,
               ),
             ),
+            suffixIcon: isPasswordField
+                ? IconButton(
+                    icon: Icon(
+                      signupProvider.isPasswordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                      color: const Color(0xff0373F3),
+                    ),
+                    onPressed: () {
+                      signupProvider.tooglePasswordVisibility();
+                    },
+                  )
+                : null,
           ),
         ),
       ],

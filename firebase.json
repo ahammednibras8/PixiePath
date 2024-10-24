@@ -1,0 +1,21 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "edapt-63485",
+          "appId": "1:879677984368:android:503d3809dfc80019302eb5",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "edapt-63485",
+          "configurations": {
+            "android": "1:879677984368:android:503d3809dfc80019302eb5"
+          }
+        }
+      }
+    }
+  }
+}

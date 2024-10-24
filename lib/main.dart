@@ -1,12 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travel_app/core/splash/splash_provider.dart';
 import 'package:travel_app/core/theme/app_theme.dart';
-import 'package:travel_app/features/auth/presentation/forgot_password_screen.dart';
+import 'package:travel_app/features/auth/presentation/signup_screen.dart';
 import 'package:travel_app/features/auth/providers/login_provider.dart';
 import 'package:travel_app/features/auth/providers/signup_provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     MultiProvider(
       providers: [
@@ -27,7 +33,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.defaultTheme,
-      home: const ForgotPasswordScreen(),
+      home: const SignupScreen(),
     );
   }
 }
