@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "879677984368",
+    "project_id": "edapt-63485",
+    "storage_bucket": "edapt-63485.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:879677984368:android:503d3809dfc80019302eb5",
+        "android_client_info": {
+          "package_name": "dev.ahammednibras.travel"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVXfQxBMUpSm_O54zn6w3NGCvhwcrqYAQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

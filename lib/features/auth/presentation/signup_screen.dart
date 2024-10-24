@@ -10,8 +10,6 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<SignupProvider>(context);
-
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -26,62 +24,76 @@ class SignupScreen extends StatelessWidget {
             icon: const Icon(Icons.arrow_back_ios),
           ),
         ),
-        body: ChangeNotifierProvider(
-          create: (_) => SignupProvider(),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 22),
-            child: Column(
-              children: [
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Become a Tripadvisor \nmember.',
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+        body: SingleChildScrollView(
+          child: ChangeNotifierProvider(
+            create: (_) => SignupProvider(),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 22),
+              child: Column(
+                children: [
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Become a Tripadvisor \nmember.',
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 33),
-                AuthTextField(
-                  labelText: 'Email address',
-                  controller: provider.emailController,
-                  errorText: provider.emailError,
-                ),
-                const SizedBox(height: 33),
-                AuthTextField(
-                  labelText: 'Password',
-                  controller: provider.passwordController,
-                  isPasswordField: true,
-                  errorText: provider.passwordError,
-                ),
-                const SizedBox(height: 12),
-                PasswordInfoText(
-                  text: 'At least 10 characters',
-                  isValid: provider.isPasswordLengthValid,
-                ),
-                const SizedBox(height: 12),
-                PasswordInfoText(
-                  text: 'Contains a special character',
-                  isValid: provider.hasSpecialCharacter,
-                ),
-                const SizedBox(height: 33),
-                AuthButton(
-                  text: 'Sign Up',
-                  onPressed: () {
-                    provider.validateSignup();
-                  },
-                  backgroundColor: Colors.black,
-                  textColor: Colors.white,
-                ),
-                const SizedBox(height: 33),
-                AuthButton(
-                  text: 'Sign In',
-                  onPressed: () {},
-                )
-              ],
+                  const SizedBox(height: 33),
+                  Consumer<SignupProvider>(
+                    builder: (context, provider, child) => AuthTextField(
+                      labelText: 'Email address',
+                      controller: provider.emailController,
+                      errorText: provider.emailError,
+                    ),
+                  ),
+                  const SizedBox(height: 33),
+                  Consumer<SignupProvider>(
+                    builder: (context, provider, child) => AuthTextField(
+                      labelText: 'Password',
+                      controller: provider.passwordController,
+                      isPasswordField: true,
+                      errorText: provider.passwordError,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Consumer<SignupProvider>(
+                    builder: (context, provider, child) => PasswordInfoText(
+                      text: 'At least 10 characters',
+                      isValid: provider.isPasswordLengthValid,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Consumer<SignupProvider>(
+                    builder: (context, provider, child) => PasswordInfoText(
+                      text: 'Contains a special character',
+                      isValid: provider.hasSpecialCharacter,
+                    ),
+                  ),
+                  const SizedBox(height: 33),
+                  Consumer<SignupProvider>(
+                    builder: (context, provider, child) => AuthButton(
+                      text: 'Sign Up',
+                      onPressed: () {
+                        if (provider.validateSignup()) {
+                          provider.signUp(context);
+                        }
+                      },
+                      backgroundColor: Colors.black,
+                      textColor: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 33),
+                  AuthButton(
+                    text: 'Sign In',
+                    onPressed: () {},
+                  )
+                ],
+              ),
             ),
           ),
         ),
